@@ -15,16 +15,19 @@ const App = () => {
   }
 
   const onCalculate = () => {
-    const ans = eval(input)
-    if(input == ""){
-      setResult("Error")
-    }else if(isNaN(ans)){
-      setResult("NaN")
-    }else if(ans == Infinity){
-      setResult(ans)
-    }else{
-      setResult(ans)
+    const calculateRes = eval(input);
+    if(input === "") {
+      setResult("Error");
     }
+    else if(isNaN(calculateRes)) {
+      setResult("NaN");
+    } 
+    else if(calculateRes == Infinity) {
+      setResult(calculateRes);
+    } 
+    else if (calculateRes) {
+      setResult(calculateRes);
+    } 
   }
 
   const buttonsNum = [
