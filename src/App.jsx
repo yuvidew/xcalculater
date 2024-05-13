@@ -15,12 +15,15 @@ const App = () => {
   }
 
   const onCalculate = () => {
-    if("0/0" == input){
-      setResult("NaN")
-    }else if(input.length == 0){
+    const ans = eval(input)
+    if(input == ""){
       setResult("Error")
+    }else if(isNaN(ans)){
+      setResult("NaN")
+    }else if(ans == Infinity){
+      setResult(ans)
     }else{
-      setResult(eval(input))
+      setResult(ans)
     }
   }
 
