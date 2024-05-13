@@ -1,20 +1,24 @@
-import React, { useState } from 'react'
 
+import { useState } from 'react'
 
-const App = () => {
-  const [input , setInput] = useState('')
-  const [result, setResult] = useState('');
+function App() {
+  const [result, setResult] = useState("")
+  const [input, setInput] = useState("");
   
-  const handleClick = (e) => {
-    setInput(input.concat(e.target.name))
+  const handleNumber = (number) => {
+    setInput(input + number);
   }
 
-  const onClear = () => {
-    setInput("")
-    setResult("")
+  const handleOperator = (operator) => {
+    setInput(input + operator);
   }
 
-  const onCalculate = () => {
+  const handleClear = () => {
+    setInput("");
+    setResult("");
+  }
+
+  const handleEqual = () => {
     const calculateRes = eval(input);
     if(input === "") {
       setResult("Error");
@@ -28,104 +32,44 @@ const App = () => {
     else if (calculateRes) {
       setResult(calculateRes);
     } 
+      
+  
   }
-
-  const buttonsNum = [
-    {
-      text : "7",
-      name : "7",
-      onClick : handleClick
-    },
-    {
-      text : "8",
-      name : "8",
-      onClick : handleClick
-    },{
-      text : "9",
-      name : "9",
-      onClick : handleClick
-    },{
-      text : "+",
-      name : "+",
-      onClick : handleClick
-    },{
-      text : "4",
-      name : "4",
-      onClick : handleClick
-    },{
-      text : "5",
-      name : "5",
-      onClick : handleClick
-    },{
-      text : "6",
-      name : "6",
-      onClick : handleClick
-    },{
-      text : "-",
-      name : "-",
-      onClick : handleClick
-    },{
-      text : "1",
-      name : "1",
-      onClick : handleClick
-    },{
-      text : "2",
-      name : "2",
-      onClick : handleClick
-    },{
-      text : "3",
-      name : "3",
-      onClick : handleClick
-    },{
-      text : "*",
-      name : "*",
-      onClick : handleClick
-    },{
-      text : "C",
-      name : "C",
-      onClick : onClear
-    },{
-      text : "0",
-      name : "0",
-      onClick : handleClick
-    },{
-      text : "=",
-      name : "=",
-      onClick : onCalculate
-    },{
-      text : "/",
-      name : "/",
-      onClick : handleClick
-    },
-  ]
 
 
   return (
-    <div className='h-[100vh] border flex items-center justify-center flex-col gap-y-3'>
-      <h1 className='text-[2rem]'>React Calculator</h1>
-
-      <div className=' w-[20rem]'>
-        <input type="text" className=' w-full border-2 text-[1.2rem] p-2 mb-[2rem]' value={input} readOnly />
-        <input 
-          type='text' 
-          className=' w-full text-center outline-none border-none text-[1.2rem] p-2 mb-[2rem]' 
-          value={result}
-          readOnly  
-        />
-        <div className=' grid grid-cols-4 gap-3'>
-          {buttonsNum.map(ele => (
-            <button 
-              key={ele.text}
-              className=' bg-gray-200 py-3 text-[1.4rem]' 
-              onClick={ele.onClick}
-              name={ele.name}
-            >
-              {ele.text}
-            </button>
-          ))}
+    <>
+      <div className='calculator w-[25rem] m-auto'>
+        <h1 className=' text-center text-[1.3rem]'>React Calculator</h1>
+        <div className='input-text'>
+          <input 
+            type='text' 
+            value={input}
+            onChange={(e)=>setInput(e.target.value)}
+            className='w-full border-2 text-[1.2rem] p-2 mb-[2rem]'
+          />
+          {result && <p className='mb-2 text-center text-[1.3rem]'>{result}</p>}
+        </div>
+        <div className='grid grid-cols-4 gap-3'>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleNumber("7")}>7</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleNumber("8")}>8</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleNumber("9")}>9</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleOperator("+")}>+</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleNumber("4")}>4</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleNumber("5")}>5</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleNumber("6")}>6</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleOperator("-")}>-</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleNumber("1")}>1</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleNumber("2")}>2</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleNumber("3")}>3</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleOperator("*")}>*</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleClear("C")}>C</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleNumber("0")}>0</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleEqual()}>=</button>
+          <button className='bg-gray-200 py-3 text-[1.4rem]' onClick={()=>handleNumber("/")}>/</button>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
